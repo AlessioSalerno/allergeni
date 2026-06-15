@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelato Allergen Management Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="language-picker">
+            <label for="lang-select">🌐</label>
+            <select id="lang-select" onchange="cambiaLingua(this.value)">
+                <option value="it">Italiano</option>
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+        <h1 data-key="title">Registro Produzione & Allergeni</h1>
+        <p data-key="subtitle">Gestione totale di Gusti, Basi e Allergeni del laboratorio.</p>
+    </header>
+
+    <main>
+        <section class="main-dashboard">
+            <div class="filters-container">
+                <div class="filter-box">
+                    <label for="allergen-filter" data-key="filterLabel">Filtra per allergene:</label>
+                    <select id="allergen-filter" onchange="filtraGusti()">
+                        </select>
+                </div>
+                <button type="button" onclick="window.print()" class="btn-print">🖨️ Stampa / Salva PDF</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th data-key="thGusto">Gusto Gelato</th>
+                        <th data-key="thBase">Tipo/Base</th>
+                        <th data-key="thAllergeni">Allergeni Presenti</th>
+                        <th data-key="thAzioni">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="products-body">
+                    </tbody>
+            </table>
+        </section>
+
+        <div class="management-grid">
+            
+            <section class="management-card">
+                <h3 data-key="manageGustiTitle">1. Configura Gusto</h3>
+                <form id="gusto-form" onsubmit="salvaGusto(event)">
+                    <input type="hidden" id="gusto-id">
+                    
+                    <div class="form-group">
+                        <label for="gusto-nome" data-key="lblNomeGusto">Nome Gusto:</label>
+                        <input type="text" id="gusto-nome" required placeholder="Es. Pistacchio...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gusto-base" data-key="lblBaseGusto">Seleziona Base:</label>
+                        <select id="gusto-base" required>
+                            </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-key="lblAllergeniGusto">Seleziona Allergeni:</label>
+                        <div id="gusto-allergeni-checkboxes" class="checkbox-group">
+                            </div>
+                    </div>
+                    
+                    <button type="submit" id="btn-gusto-salva" class="btn-save" data-key="btnSalva">Salva Gusto</button>
+                    <button type="button" id="btn-gusto-annulla" class="btn-cancel" onclick="resetFormGusto()" style="display:none;" data-key="btnAnnulla">Annulla</button>
+                </form>
+            </section>
+
+            <section class="management-card">
+                <h3 data-key="manageBasiTitle">2. Gestione Basi</h3>
+                <form id="base-form" onsubmit="salvaBase(event)">
+                    <input type="hidden" id="base-id">
+                    <div class="form-group">
+                        <input type="text" id="base-nome" required placeholder="Es. Base Latte...">
+                    </div>
+                    <button type="submit" id="btn-base-salva" class="btn-save" data-key="btnSalva">Salva Base</button>
+                    <button type="button" id="btn-base-annulla" class="btn-cancel" onclick="resetFormBase()" style="display:none;" data-key="btnAnnulla">Annulla</button>
+                </form>
+                <ul id="basi-list" class="manage-list"></ul>
+            </section>
+
+            <section class="management-card">
+                <h3 data-key="manageAllergeniTitle">3. Gestione Allergeni</h3>
+                <form id="allergen-form" onsubmit="salvaAllergene(event)">
+                    <input type="hidden" id="allergen-id">
+                    <div class="form-group">
+                        <input type="text" id="allergen-nome" required placeholder="Es. Lattosio...">
+                    </div>
+                    <button type="submit" id="btn-allergen-salva" class="btn-save" data-key="btnSalva">Salva Allergene</button>
+                    <button type="button" id="btn-allergen-annulla" class="btn-cancel" onclick="resetFormAllergene()" style="display:none;" data-key="btnAnnulla">Annulla</button>
+                </form>
+                <ul id="allergeni-list" class="manage-list"></ul>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
